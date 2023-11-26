@@ -1,76 +1,58 @@
-import java.io.FileNotFoundException;
-
 
 
 public class Main {
     static GlobalFunctions gb=new GlobalFunctions();
 
     public static void recursiveOptions() {
-        int[] numbers;
-        gb.printMenu("Chooose amount of numbers to be sorted",new String[]{"10","1 000","10 000"
-                ,"100 000","1 000 000"});
-        int amount=gb.getIntInputFromUser();
-        numbers=getNumbers(amount);
+        int amount=gb.getAmountIntInputFromUser();
+
         gb.printMenu("Recursive",
                 new String[]{"First pivot", "Random pivot", "Median of three pivot","Insertion sort"});
         int choice=gb.getIntInputFromUser();
         switch (choice)
         {
             case 1:
-                gb.getAverageTime(numbers,Quicksort::recursiveQuicksortFirst);
+                gb.getAverageTime(amount,Quicksort::recursiveQuicksortFirst);
                 break;
             case 2:
-                gb.getAverageTime(numbers,Quicksort::recursiveQuicksortRandom);
+                gb.getAverageTime(amount,Quicksort::recursiveQuicksortRandom);
                 break;
             case 3:
-                gb.getAverageTime(numbers,Quicksort::recursiveQuicksortMedian);
+                gb.getAverageTime(amount,Quicksort::recursiveQuicksortMedian);
                 break;
             case 4:
-                gb.getAverageTimeRecursiveInsertion(numbers);
+                gb.getAverageTimeRecursiveInsertion(amount);
                 break;
         }
     }
 
     public static void iterativeOptions(){
-        int[] numbers;
-        gb.printMenu("Chooose amount of numbers to be sorted",new String[]{"10","1 000","10 000"
-            ,"100 000","1 000 000"});
-        int amount=gb.getIntInputFromUser();
-        numbers=getNumbers(amount);
+        int amount=gb.getAmountIntInputFromUser();
         gb.printMenu("Iterative",
                 new String[]{"First pivot", "Random pivot", "Median of three pivot","Insertion sort"});
         int choice=gb.getIntInputFromUser();
         switch ( choice)
         {
             case 1:
-                gb.getAverageTime(numbers,Quicksort::iterativeQuicksortFirst);
+                gb.getAverageTime(amount,Quicksort::iterativeQuicksortFirst);
                 break;
             case 2:
-                gb.getAverageTime(numbers,Quicksort::iterativeQuicksortRandom);
+                gb.getAverageTime(amount,Quicksort::iterativeQuicksortRandom);
                 break;
             case 3:
-                gb.getAverageTime(numbers,Quicksort::iterativeQuicksortMedian);
+                gb.getAverageTime(amount,Quicksort::iterativeQuicksortMedian);
                 break;
             case 4:
-                gb.getAverageTimeIterativeInsertion(numbers);
+                gb.getAverageTimeIterativeInsertion(amount);
                 break;
 
         }
     }
 
-    public static int[] getNumbers(int amount){
-        int[] numbers;
-        try {
-            numbers = ReadFile.readFile(amount);
 
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        return numbers;
-    }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
+
         boolean cont=true;
         while (cont) {
 

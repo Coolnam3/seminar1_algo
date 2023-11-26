@@ -1,6 +1,6 @@
 
 import java.util.Random;
-import java.util.Stack;
+
 
 interface quicksortInterface{
     public void apply(int[] arr, int max, int high);
@@ -50,14 +50,16 @@ public class Quicksort{
         return leftp;
 
     }
+
+
+    //Recursive
+
     public static void recursiveQuicksortFirst(int[] arr, int low, int high) {
         if (low < high) {
             int middle = partition(arr, low, high,low);
             recursiveQuicksortFirst(arr, low, middle - 1);
             recursiveQuicksortFirst(arr, middle + 1, high);
         }
-
-
     }
 
 
@@ -81,60 +83,77 @@ public class Quicksort{
         }
     }
 
+    // Iterative versions
+
     public static void iterativeQuicksortFirst(int[] arr, int low, int high) {
-        Stack<Integer> stack = new Stack<>();
-        stack.push(low);
-        stack.push(high);
+        int[] stack = new int[high - low + 1];
+        int top = -1;
+        stack[++top] = low;
+        stack[++top] = high;
 
-        while (!stack.isEmpty()) {
-            high = stack.pop();
-            low = stack.pop();
 
-            if (low < high) {
-                int middle = partition(arr, low, high, low);
-                stack.push(low);
-                stack.push(middle - 1);
-                stack.push(middle + 1);
-                stack.push(high);
+        while (top >= 0) {
+
+            high = stack[top--];
+            low = stack[top--];
+
+            int middle = partition(arr, low, high,low);
+
+            // If there are elements on left side of pivot,
+            // then push left side to stack
+            if (middle - 1 > low) {
+                stack[++top] = low;
+                stack[++top] = middle - 1;
+            }
+
+            // If there are elements on right side of pivot,
+            // then push right side to stack
+            if (middle + 1 < high) {
+                stack[++top] = middle + 1;
+                stack[++top] = high;
             }
         }
     }
+
     public static void iterativeQuicksortRandom(int[] arr, int low, int high) {
-        Stack<Integer> stack = new Stack<>();
-        stack.push(low);
-        stack.push(high);
+        int[] stack = new int[high - low + 1];
+        int top = -1;
+        stack[++top] = low;
+        stack[++top] = high;
 
 
-        while (!stack.isEmpty()) {
-            high = stack.pop();
-            low = stack.pop();
-
-            if (low < high) {
-                int pivotIndex = getRandomNumberUsingNextInt(low, high);
-                int middle = partition(arr, low, high, pivotIndex);
-                stack.push(low);
-                stack.push(middle - 1);
-                stack.push(middle + 1);
-                stack.push(high);
+        while (top >= 0) {
+            high = stack[top--];
+            low = stack[top--];
+            int middle = partition(arr, low, high,getRandomNumberUsingNextInt(low,high));
+            if (middle - 1 > low) {
+                stack[++top] = low;
+                stack[++top] = middle - 1;
+            }
+            if (middle + 1 < high) {
+                stack[++top] = middle + 1;
+                stack[++top] = high;
             }
         }
     }
     public static void iterativeQuicksortMedian(int[] arr, int low, int high) {
-        Stack<Integer> stack = new Stack<>();
-        stack.push(low);
-        stack.push(high);
+        int[] stack = new int[high - low + 1];
+        int top = -1;
+        stack[++top] = low;
+        stack[++top] = high;
 
-        while (!stack.isEmpty()) {
-            high = stack.pop();
-            low = stack.pop();
 
-            if (low < high) {
-                int pivotIndex = getMedian(arr, low, high);
-                int middle = partition(arr, low, high, pivotIndex);
-                stack.push(low);
-                stack.push(middle - 1);
-                stack.push(middle + 1);
-                stack.push(high);
+        while (top >= 0) {
+            high = stack[top--];
+            low = stack[top--];
+            int middle = partition(arr, low, high,getMedian(arr,low,high));
+            if (middle - 1 > low) {
+                stack[++top] = low;
+                stack[++top] = middle - 1;
+            }
+            if (middle + 1 < high) {
+                stack[++top] = middle + 1;
+                stack[++top] = high;
             }
         }
     }
