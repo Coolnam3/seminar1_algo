@@ -24,7 +24,6 @@ public class GlobalFunctions {
             long endTime=System.nanoTime();
             times[i]=endTime-startTime;
             System.out.println(i);
-            System.out.println(Arrays.toString(numbers));
         }
 
 
@@ -34,14 +33,15 @@ public class GlobalFunctions {
     }
 
     public void getAverageTimeIterativeInsertion(int amount) {
-            long[] times = new long[10];
-            for (int i = 0; i < times.length; i++) {
-                int[] numbers=getNumbers(amount);
-                long startTime = System.nanoTime();
-                InsertionSort.iterativeInsertionSort(numbers);
-                long endTime = System.nanoTime();
-                times[i] = endTime - startTime;
-                System.out.println(i);
+        InsertionSort is=new InsertionSort();
+        long[] times = new long[10];
+        for (int i = 0; i < times.length; i++) {
+            int[] numbers=getNumbers(amount);
+            long startTime = System.nanoTime();
+            is.iterativeInsertionSort(numbers);
+            long endTime = System.nanoTime();
+            times[i] = endTime - startTime;
+            System.out.println(i);
             }
             double average = (double) (LongStream.of(times).sum()) / times.length;
             System.out.printf("The average time is: %.8f \n", average / 1000000);
@@ -49,11 +49,12 @@ public class GlobalFunctions {
     }
 
     public void getAverageTimeRecursiveInsertion(int amount){
+        InsertionSort is=new InsertionSort();
         long[] times = new long[10];
         for (int i = 0; i < times.length; i++) {
             int[] numbers=getNumbers(amount);
             long startTime = System.nanoTime();
-            InsertionSort.recursiveInsertionSort(numbers,amount-1);
+            is.recursiveInsertionSort(numbers,amount-1);
             long endTime = System.nanoTime();
             times[i] = endTime - startTime;
             System.out.println(i);

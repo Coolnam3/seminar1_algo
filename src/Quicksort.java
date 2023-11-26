@@ -8,17 +8,17 @@ interface quicksortInterface{
     }
 public class Quicksort{
 
-    public static int getRandomNumberUsingNextInt(int min, int max) {
+    public int getRandomNumberUsingNextInt(int min, int max) {
         Random random = new Random();
         return random.nextInt(max - min) + min;
     }
-    static void swap(int[] arr, int a, int b) {
+    public void swap(int[] arr, int a, int b) {
         int temp = arr[a];
         arr[a] = arr[b];
         arr[b] = temp;
     }
 
-    public static int partition(int[] arr, int low, int high,int pivot) {
+    public int partition(int[] arr, int low, int high,int pivot) {
         swap(arr, pivot, high);
         int pivotValue = arr[high];
         int leftp = low;
@@ -43,7 +43,7 @@ public class Quicksort{
 
     //Recursive
 
-    public static void recursiveQuicksortFirst(int[] arr, int low, int high) {
+    public void recursiveQuicksortFirst(int[] arr, int low, int high) {
         if (low < high) {
             int middle = partition(arr, low, high,low);
             recursiveQuicksortFirst(arr, low, middle - 1);
@@ -52,7 +52,7 @@ public class Quicksort{
     }
 
 
-    public static void recursiveQuicksortRandom(int[] arr, int low, int high) {
+    public void recursiveQuicksortRandom(int[] arr, int low, int high) {
         if (low < high) {
             int pivot=getRandomNumberUsingNextInt(low,high);
             int middle = partition(arr, low, high,pivot);
@@ -62,7 +62,7 @@ public class Quicksort{
     }
 
 
-    public static void recursiveQuicksortMedian(int[] arr, int low, int high) {
+    public void recursiveQuicksortMedian(int[] arr, int low, int high) {
 
         if (low < high) {
             int mid = low+(high - low) / 2;
@@ -83,7 +83,7 @@ public class Quicksort{
 
     // Iterative versions
 
-    public static void iterativeQuicksortFirst(int[] arr, int low, int high) {
+    public void iterativeQuicksortFirst(int[] arr, int low, int high) {
         int[] stack = new int[high - low + 1];
         int top = -1;
         stack[++top] = low;
@@ -113,7 +113,7 @@ public class Quicksort{
         }
     }
 
-    public static void iterativeQuicksortRandom(int[] arr, int low, int high) {
+    public void iterativeQuicksortRandom(int[] arr, int low, int high) {
         int[] stack = new int[high - low + 1];
         int top = -1;
         stack[++top] = low;
@@ -134,7 +134,7 @@ public class Quicksort{
             }
         }
     }
-    public static void iterativeQuicksortMedian(int[] arr, int low, int high) {
+    public void iterativeQuicksortMedian(int[] arr, int low, int high) {
         int[] stack = new int[high - low + 1];
         int top = -1;
         stack[++top] = low;

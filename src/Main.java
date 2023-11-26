@@ -4,6 +4,7 @@ public class Main {
     static GlobalFunctions gb=new GlobalFunctions();
 
     public static void recursiveOptions() {
+        Quicksort qs=new Quicksort();
         int amount=gb.getAmountIntInputFromUser();
 
         gb.printMenu("Recursive",
@@ -12,13 +13,13 @@ public class Main {
         switch (choice)
         {
             case 1:
-                gb.getAverageTime(amount,Quicksort::recursiveQuicksortFirst);
+                gb.getAverageTime(amount,qs::recursiveQuicksortFirst);
                 break;
             case 2:
-                gb.getAverageTime(amount,Quicksort::recursiveQuicksortRandom);
+                gb.getAverageTime(amount,qs::recursiveQuicksortRandom);
                 break;
             case 3:
-                gb.getAverageTime(amount,Quicksort::recursiveQuicksortMedian);
+                gb.getAverageTime(amount,qs::recursiveQuicksortMedian);
                 break;
             case 4:
                 gb.getAverageTimeRecursiveInsertion(amount);
@@ -27,6 +28,7 @@ public class Main {
     }
 
     public static void iterativeOptions(){
+        Quicksort qs=new Quicksort();
         int amount=gb.getAmountIntInputFromUser();
         gb.printMenu("Iterative",
                 new String[]{"First pivot", "Random pivot", "Median of three pivot","Insertion sort"});
@@ -34,13 +36,13 @@ public class Main {
         switch ( choice)
         {
             case 1:
-                gb.getAverageTime(amount,Quicksort::iterativeQuicksortFirst);
+                gb.getAverageTime(amount,qs::iterativeQuicksortFirst);
                 break;
             case 2:
-                gb.getAverageTime(amount,Quicksort::iterativeQuicksortRandom);
+                gb.getAverageTime(amount,qs::iterativeQuicksortRandom);
                 break;
             case 3:
-                gb.getAverageTime(amount,Quicksort::iterativeQuicksortMedian);
+                gb.getAverageTime(amount,qs::iterativeQuicksortMedian);
                 break;
             case 4:
                 gb.getAverageTimeIterativeInsertion(amount);

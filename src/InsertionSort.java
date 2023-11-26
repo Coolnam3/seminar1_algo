@@ -2,7 +2,7 @@
 public class InsertionSort{
 
 
-    public static void recursiveInsertionSort(int[] arr, int n) {
+    public void recursiveInsertionSort(int[] arr, int n) {
         if (n <= 1) {
             return;
         }
@@ -17,7 +17,7 @@ public class InsertionSort{
 
         arr[compare + 1] = pivot;
     }
-    public static void iterativeInsertionSort(int[] arr){
+    public void iterativeInsertionSort(int[] arr){
         int size=arr.length;
         for(int index=1;index<size;index++){
             int pivot=arr[index];
