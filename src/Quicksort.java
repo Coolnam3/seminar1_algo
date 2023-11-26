@@ -17,17 +17,6 @@ public class Quicksort{
         arr[a] = arr[b];
         arr[b] = temp;
     }
-    public static int getMedian(int[] arr, int low, int high) {
-        int mid = (low + high) / 2;
-
-        if ((arr[low] <= arr[mid] && arr[mid] <= arr[high]) || (arr[high] <= arr[mid] && arr[mid] <= arr[low])) {
-            return mid;
-        } else if ((arr[mid] <= arr[low] && arr[low] <= arr[high]) || (arr[high] <= arr[low] && arr[low] <= arr[mid])) {
-            return low;
-        } else {
-            return high;
-        }
-    }
 
     public static int partition(int[] arr, int low, int high,int pivot) {
         swap(arr, pivot, high);
@@ -76,7 +65,16 @@ public class Quicksort{
     public static void recursiveQuicksortMedian(int[] arr, int low, int high) {
 
         if (low < high) {
-            int pivot=getMedian(arr, low, high);
+            int mid = low+(high - low) / 2;
+            int pivot;
+
+            if ((arr[low] <= arr[mid] && arr[mid] <= arr[high]) || (arr[high] <= arr[mid] && arr[mid] <= arr[low])) {
+                pivot=mid;
+            } else if ((arr[mid] <= arr[low] && arr[low] <= arr[high]) || (arr[high] <= arr[low] && arr[low] <= arr[mid])) {
+                pivot=low;
+            } else {
+                pivot=high;
+            }
             int middle = partition(arr, low, high,pivot);
             recursiveQuicksortMedian(arr, low, middle - 1);
             recursiveQuicksortMedian(arr, middle + 1, high);
@@ -142,11 +140,21 @@ public class Quicksort{
         stack[++top] = low;
         stack[++top] = high;
 
-
         while (top >= 0) {
             high = stack[top--];
             low = stack[top--];
-            int middle = partition(arr, low, high,getMedian(arr,low,high));
+            int mid = low+(high - low) / 2;
+            int pivot;
+
+            if ((arr[low] <= arr[mid] && arr[mid] <= arr[high]) || (arr[high] <= arr[mid] && arr[mid] <= arr[low])) {
+                pivot=mid;
+            } else if ((arr[mid] <= arr[low] && arr[low] <= arr[high]) || (arr[high] <= arr[low] && arr[low] <= arr[mid])) {
+                pivot=low;
+            } else {
+                pivot=high;
+            }
+
+            int middle = partition(arr, low, high,pivot);
             if (middle - 1 > low) {
                 stack[++top] = low;
                 stack[++top] = middle - 1;
@@ -156,6 +164,8 @@ public class Quicksort{
                 stack[++top] = high;
             }
         }
+
+
     }
 
 

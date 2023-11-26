@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.LongStream;
 
@@ -23,6 +24,7 @@ public class GlobalFunctions {
             long endTime=System.nanoTime();
             times[i]=endTime-startTime;
             System.out.println(i);
+            System.out.println(Arrays.toString(numbers));
         }
 
 
