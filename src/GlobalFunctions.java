@@ -17,13 +17,13 @@ public class GlobalFunctions {
     }
     public void getAverageTime(int amount,quicksortInterface function){
         long[] times=new long[10];
+        int[] numbers=getNumbers(amount);
         for(int i=0;i<times.length;i++){
-            int[] numbers=getNumbers(amount);
+            int[] numbersCopy = Arrays.copyOf(numbers, numbers.length);
             long startTime=System.nanoTime();
-            function.apply(numbers,0,amount-1);
+            function.apply(numbersCopy,0,amount-1);
             long endTime=System.nanoTime();
             times[i]=endTime-startTime;
-            System.out.println(i);
         }
 
 
@@ -35,13 +35,13 @@ public class GlobalFunctions {
     public void getAverageTimeIterativeInsertion(int amount) {
         InsertionSort is=new InsertionSort();
         long[] times = new long[10];
+        int[] numbers=getNumbers(amount);
         for (int i = 0; i < times.length; i++) {
-            int[] numbers=getNumbers(amount);
+            int[] numbersCopy = Arrays.copyOf(numbers, numbers.length);
             long startTime = System.nanoTime();
-            is.iterativeInsertionSort(numbers);
+            is.iterativeInsertionSort(numbersCopy);
             long endTime = System.nanoTime();
             times[i] = endTime - startTime;
-            System.out.println(i);
             }
             double average = (double) (LongStream.of(times).sum()) / times.length;
             System.out.printf("The average time is: %.8f \n", average / 1000000);
@@ -51,13 +51,13 @@ public class GlobalFunctions {
     public void getAverageTimeRecursiveInsertion(int amount){
         InsertionSort is=new InsertionSort();
         long[] times = new long[10];
+        int[] numbers=getNumbers(amount);
         for (int i = 0; i < times.length; i++) {
-            int[] numbers=getNumbers(amount);
+            int[] numbersCopy = Arrays.copyOf(numbers, numbers.length);
             long startTime = System.nanoTime();
-            is.recursiveInsertionSort(numbers,amount-1);
+            is.recursiveInsertionSort(numbersCopy,amount-1);
             long endTime = System.nanoTime();
             times[i] = endTime - startTime;
-            System.out.println(i);
         }
         double average = (double) (LongStream.of(times).sum()) / times.length;
         System.out.printf("The average time is: %.8f \n", average / 1000000);
@@ -78,7 +78,7 @@ public class GlobalFunctions {
     }
     public int getAmountIntInputFromUser() {
         printMenu("Choose amount of numbers to be sorted",
-                new String[]{"10","1 000","10 000"
+                new String[]{"100","1 000","10 000"
                 ,"100 000","1 000 000"});
         Scanner input = new Scanner(System.in);
         int choice = 0;
@@ -91,7 +91,7 @@ public class GlobalFunctions {
             getIntInputFromUser();
         }
         return switch (choice) {
-            case 1 -> 10;
+            case 1 -> 100;
             case 2 -> 1000;
             case 3 -> 10000;
             case 4 -> 100000;
